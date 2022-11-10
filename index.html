@@ -43,3 +43,36 @@
       </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+
+
+    <script>
+        if(typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        }else {
+            web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+
+        }
+
+
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+
+        var contractAbi = 
+    var contractAddress = '';
+
+    var contract = web3.eth.contract(contractAbi).at(contractAddress);
+
+    contract.candidateName(function(err, candidateName) {
+        $('#candidateName').html(candidateName);
+    });
+
+    $('form').on('submit', function(event) {
+        event.preventDefault();
+        contract.setCandidate($('input').val());
+    });
+    </script>
+
+    </body>
+    </html>
